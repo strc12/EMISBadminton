@@ -70,59 +70,43 @@
 			
     </ul>
 	</div><br><br><br>
-	<h3>For the Players League table: <a href="/playerleaguetable.php">CLICK HERE</a></h3>
 	
-	<ins>Teams League A Table</ins><br>
+	<h3>For the Teams League Table: <a href="/leaguetable.php">CLICK HERE</a><br><br>
+	
+	<ins>Top 20 Players in the League</ins>
 	
 <?php
 	include 'connect.php';
 	echo '<table style="width:30%">';
 	echo '<tr>';
 	echo '<th>Position</th>';
-	echo '<th>Team Name</th>';
+	echo '<th>Player Name</th>';
 	echo '<th>Games Won</th>';
 	echo '</tr>';
+	$count = 0;
 	
-	$Acount = 0;
+	$sqlquery = "SELECT * from players order by gameswon desc limit 20";
+	$results = $mysqli -> query($sqlquery);
 	
-	$Asqlquery = "SELECT name, gameswon from team where league = 'A' order by gameswon desc";
-	$Aresults = $mysqli -> query($Asqlquery);
-	if ($Aresults -> num_rows > 0) {
-		while ($Arows = $Aresults -> fetch_assoc()) {
+	if ($results -> num_rows >0) {
+		while ($rows = $results -> fetch_assoc()) {
+			$queryschoolID = $rows['SchoolID'];
+			$schoolquery = "SELECT schoolname from schools where SchoolID = '$queryschoolID'";
+			$schoolresult = $mysqli -> query($schoolquery);
+			while ($schoolrows = $schoolresult -> fetch_assoc()) {
+				$foundschoolname = $schoolrows ['schoolname'];
+			}
+			
 			$count = $count + 1;
 			echo '<tr>';
 			echo '<td>' . $count . '</td>';
-			echo '<td>' . $Arows['name'] . '</td>';
-			echo '<td>' . $Arows['gameswon'] . '</td>';
+			echo "<td>" . $rows['FirstName'] . " " . $rows['LastName'] . " (" . $foundschoolname . ")</td>";
+			echo "<td>" . $rows['gameswon'] . "</td>";
 			echo '</tr>';
-			
 		}
 	}
-	echo '</table>';
-	echo '<ins>Teams League B Table</ins><br>';
-	echo '<table style="width:30%">';
-	echo '<tr>';
-	echo '<th>Position</th>';
-	echo '<th>Team Name</th>';
-	echo '<th>Games Won</th>';
-	echo '</tr>';
-	
-	$Bcount = 0;
-	
-	$Bsqlquery = "SELECT name, gameswon from team where league ='B' order by gameswon desc";
-	$Bresults = $mysqli ->query($Bsqlquery);
-	if ($Bresults -> num_rows > 0) {
-		while ($Brows = $Bresults -> fetch_assoc()) {
-			$Bcount = $Bcount + 1;
-			echo '<tr>';
-			echo '<td>' . $Bcount . '</td>';
-			echo '<td>' . $Brows['name'] . '</td>';
-			echo '<td>' . $Brows['gameswon'] . '</td>';
-			echo '<tr>';
-		}
-	}
-	mysqli_close($mysqli);
 ?>
+	
 	
 </body>
 </html>

@@ -1,50 +1,50 @@
-<DOCTYPE! HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<title>Show Hide Dropdown Using CSS</title>
+<style type="text/css">
+    ul{
+        padding: 0;
+        list-style: none;
+    }
+    ul li{
+        float: left;
+        width: 100px;
+        text-align: center;
+    }
+    ul li a{
+        display: block;
+        padding: 5px 10px;
+        color: #333;
+        background: #f2f2f2;
+        text-decoration: none;
+    }
+    ul li a:hover{
+        color: #fff;
+        background: #939393;
+    }
+    ul li ul{
+        display: none;
+    }
+    ul li:hover ul{
+        display: block; /* display the dropdown */
+    }
+</style>
 </head>
 <body>
-<form action ="school.html" method ="POST">
-	<select name="dropdown">
-	
-	
-		<?php
-
-
-// CONNECT TO THE DATABASE
-	$DB_NAME = 'badminton';
-	$DB_HOST = 'localhost';
-	$DB_USER = 'root';
-	$DB_PASS = 'squirt72';
-	
-	$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-	
-	if (mysqli_connect_errno()) {
-		printf("Connect failed: %s\n", mysqli_connect_error());
-		exit();
-	}
-	$query = "SELECT name FROM schools";
-	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-
-// GOING THROUGH THE DATA
-	if($result->num_rows > 0) {
-		while($row = $result->fetch_assoc()) {
-		
-			//code for drop down list
-			echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
-			
-		}
-	}
-	else {
-		echo 'NO RESULTS';	
-	}
-	
-// CLOSE CONNECTION
-	mysqli_close($mysqli);
-	
-
-?>
-</select>
-<input type="submit" value="Submit"><br>
-</form>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li>
+            <a href="#">Products</a>
+            <ul>
+                <li><a href="#">Laptops</a></li>
+                <li><a href="#">Monitors</a></li>
+                <li><a href="#">Printers</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Contact</a></li>
+    </ul>
 </body>
 </html>
