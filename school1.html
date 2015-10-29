@@ -1,0 +1,32 @@
+<doctype! HTML>
+<html>
+<head>
+</head>
+<body>
+		
+<form action =<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method ="POST"> 
+	School:<input type="text" name="school"><br>
+	Teacher:<input type="text" name="teacher"><br>
+	<input type="submit" value="Submit"><br>
+	<?php
+
+
+// CONNECT TO THE DATABASE
+	include 'connect.php';
+
+	$sql = "INSERT INTO schools VALUES ('$_POST[school]', '$_POST[teacher]',NULL)";
+
+	if (mysqli_query($mysqli, $sql)) {
+		echo "New record created successfully";
+	} else {
+		echo "Error:" . $sql . "<br>" . mysqli_error($mysqli);
+}
+	
+// CLOSE CONNECTION
+	mysqli_close($mysqli);
+	
+//echo htmlspecialchars($_SERVER["PHP_SELF"]); - PHP code for redirect to self...
+?>
+</form>
+</body>
+</html>
