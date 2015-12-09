@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="day.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+<h1>MyWebsite</h1>
+<button data-file="day">Day</button>
+<button data-file="night">Night</button>
+
+<script type="text/javascript">
+	(function () {
+		var link=$('link');
+		
+		$('button').click(function(){
+			var $this=$(this),
+				stylesheet =$this.data('file');
+			link.attr('href', stylesheet+'.css');
+			$this
+				.siblings('button')
+					.removeAttr('disabled')
+					.end()
+				.attr('disabled','disabled')
+			
+			
+	})
+})();
+</script>
+
+</body>
+</html>

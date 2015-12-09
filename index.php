@@ -94,7 +94,9 @@
                         echo '<tr>';
                         echo '<th>Date</th>';
                         echo '<th>Home Team</th>';
+			echo '<th>Home Score</th>';
                         echo '<th>Away Team</th>';
+			echo '<th>Away Score</th>';
                         echo '</tr>';
                         $datenow = date('Y-m-d');
 
@@ -108,11 +110,14 @@
                           while ($teamname1 = $homeresult->fetch_assoc()) {
                             $hometeamname1 = $teamname1 ['name'];
                             $hometeamleague = $teamname1 ['league'];
+                            $hometeamscore = $row ['homegames'];
+
 
                             }
                           while ($teamname2 = $awaynamequery -> fetch_assoc()) {
                             $awayteamname2 = $teamname2 ['name'];
                             $awayteamleague = $teamname2 ['league'];
+                            $awayteamscore = $row ['awaygames'];
                             }
 
 
@@ -123,10 +128,10 @@
                             if (($_POST['playedornot'] == "All") and (($homeid== $_POST['filterteam']) or ($awayid == $_POST['filterteam']))) {
 
                               if ($datenow<($row['FixtDate'])){
-                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate']))."</td><td>".$hometeamname1. " (". $hometeamleague.")</td> <td>" .$awayteamname2." (".$awayteamleague.")</td></tr>";
+                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate']))."</td><td>".$hometeamname1. " (". $hometeamleague.")</td> <td>".$hometeamscore."</td><td>" .$awayteamname2." (".$awayteamleague.")</td><td>".$awayteamscore."</td></tr>";
 
                               } else {
-                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "  (Played) </td><td>".$hometeamname1. " (". $hometeamleague.")</td><td>" .$awayteamname2." (".$awayteamleague.")</td></tr>";
+                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "  (Played) </td><td>".$hometeamname1. " (". $hometeamleague.")</td><td>".$hometeamscore."</td><td>" .$awayteamname2." (".$awayteamleague.")</td><td>".$awayteamscore."</td></tr>";
                               }
 
                             }
@@ -134,23 +139,23 @@
                             if (($_POST['playedornot'] == "Played") and (($homeid== $_POST['filterteam']) or ($awayid == $_POST['filterteam']))) {
 
                               if ($datenow>($row['FixtDate'])){
-                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "  (Played) </td><td>".$hometeamname1. " (". $hometeamleague.")</td><td>" .$awayteamname2." (".$awayteamleague.")</td></tr>";
+                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "  (Played) </td><td>".$hometeamname1. " (". $hometeamleague.")</td><td>".$hometeamscore."</td><td>" .$awayteamname2." (".$awayteamleague.")</td><td>".$awayteamscore."</td></tr>";
 
                               }
 
                             }
                             if (($_POST['playedornot'] == "NotPlayed") and (($homeid == $_POST['filterteam']) or ($awayid == $_POST['filterteam']))) {
                               if ($datenow<($row['FixtDate'])) {
-                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "</td><td>".$hometeamname1." (". $hometeamleague.")</td><td>".$awayteamname2." (".$awayteamleague.")</td></tr>";
+                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "</td><td>".$hometeamname1." (". $hometeamleague.")</td><td>".$hometeamscore."</td><td>".$awayteamname2." (".$awayteamleague.")</td><td>".$awayteamscore."</td></tr>";
                               }
                             }
 
                           } else {
                             if ($datenow<($row['FixtDate'])){
-                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate']))."</td><td>".$hometeamname1. " (". $hometeamleague.")</td> <td>" .$awayteamname2." (".$awayteamleague.")</td></tr>";
+                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate']))."</td><td>".$hometeamname1. " (". $hometeamleague.")</td> <td>".$hometeamscore."</td><td>" .$awayteamname2." (".$awayteamleague.")</td><td>".$awayteamscore."</td></tr>";
 
                               } else {
-                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "  (Played) </td><td>".$hometeamname1. " (". $hometeamleague.")</td><td>" .$awayteamname2." (".$awayteamleague.")</td></tr>";
+                                echo "<tr><td>".date("d-m-Y", strtotime($row['FixtDate'])). "  (Played) </td><td>".$hometeamname1. " (". $hometeamleague.")</td><td>".$hometeamscore."</td><td>" .$awayteamname2." (".$awayteamleague.")</td><td>".$awayteamscore."</td></tr>";
                               }
                             }
 

@@ -1,0 +1,77 @@
+<html>
+<head>
+<style>
+	header {
+  background: #E34F50;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 15px;
+  font-size: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+#go {
+  text-align: center;
+  color: blue;
+}
+
+p:hover {
+  color: darkblue;
+}
+
+ul {
+  -webkit-padding-start: 0;
+}
+
+ul li {
+  list-style-type: none;
+  width: 40%;
+  margin-left: 30%;
+  background: #7EC7E3;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script>
+$("#go").click(function() {
+  var item = $("#todo").val();
+  $("ul").prepend("<li>" + item + "</li>");
+});
+</script>
+</head>
+<header>
+  <h1>ToDo List</h1>
+</header>
+
+<label for="todo">What would you like to remember?</label>
+<input id="todo" type="text" />
+<p id="go">Go</p>
+
+<ul>
+  <li>Point 1</li>
+  <li>Point 2</li>
+  <li>Point 3</li>
+</ul>
+</html>

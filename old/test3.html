@@ -1,0 +1,321 @@
+<html>
+<head>	
+<title>O's X's</title>
+
+<meta name="viewport" content="user-scalable=no, width=device-width" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="apple-touch-startup-image" href="images/noughtscrosses.png" />
+
+<link rel="stylesheet" href="iphone.css" type="text/css" 
+media="only screen and (max-width: 480px)" />
+<link rel="stylesheet" href="desktop.css" type="text/css" 
+media="screen and (min-width: 481px)" />
+<style>
+body{
+	text-align: center;
+	font-family: arial;
+	font-size: 30px;
+}
+
+.square {
+	border: 1px solid #000;
+	width: 70px;
+	height: 70px;
+	float: left; /* makes them display next to each other */
+}
+
+.blank {
+
+}
+
+.cross {
+	color: #ff0000; /* red text */
+}
+
+.nought {
+	color: #2E9AFE; /* blue text */
+}
+
+.unclickable {
+
+}
+
+/* keeps divs in a row */
+.row {
+	text-align: center;
+	font-size: 50px;
+	font-family: "comic sans ms", arial;
+	width: 220px;
+	margin: 0 auto;
+}
+
+#turnBox {
+	font-size: 30px;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+h1 {
+	display: none;
+}
+
+button{
+	border: 1px solid #000;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	background: #bfd255; /* Old browsers */
+	background: -moz-linear-gradient(top,  #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bfd255), color-stop(50%,#8eb92a), color-stop(51%,#72aa00), color-stop(100%,#9ecb2d)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* IE10+ */
+	background: linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+	margin-top: 20px;
+
+}
+
+#messageBox{
+	font-family: arial;
+	font-size: 30px;
+}
+desktop.css for jQuery implementation
+
+body{
+	text-align: center;
+	font-family: arial;
+	font-size: 30px;
+}
+
+.square {
+	border: 1px solid #000;
+	width: 100px;
+	height: 100px;
+	float: left; /* makes them display next to each other */
+}
+
+.blank {
+
+}
+
+.cross {
+	color: #ff0000; /* red text */
+}
+
+.nought {
+	color: #2E9AFE; /* blue text */
+}
+
+.unclickable {
+
+}
+
+/* keeps divs in a row */
+.row {
+	text-align: center;
+	font-size: 60px;
+	font-family: "comic sans ms";
+	height: 110px;
+	width: 320px;
+	margin: 0 auto;
+}
+
+#turnBox {
+	font-size: 14px;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+#messageBox{
+	display: block;
+}
+</style>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+<script type="text/javascript">		
+// Function to set all board array values to 0
+function wipeBoard(board){
+	for( var i=1; i<=9; i++ ){
+		board["square"+i] = "";				
+	}
+}
+
+// This function sucks!
+function checkWinner(board){
+
+	var winner = "N";
+	// Check rows
+	if( board["square1"] == board["square2"] && board["square2"] == 
+            board["square3"] && board["square1"] != ""){
+		winner = board["square1"];
+	}
+	if( board["square4"] == board["square5"] && board["square5"] == 
+            board["square6"] && board["square4"] != ""){
+		winner = board["square4"];
+	}
+	if( board["square7"] == board["square8"] && board["square8"] == 
+            board["square9"] && board["square7"] != ""){
+		winner = board["square7"];
+	}
+
+	// Check cols
+	if( board["square1"] == board["square4"] && board["square4"] == 
+            board["square7"] && board["square1"] != ""){
+		winner = board["square1"];
+	}
+	if( board["square2"] == board["square5"] && board["square5"] == 
+            board["square8"] && board["square2"] != ""){
+		winner = board["square2"];
+	}
+	if( board["square3"] == board["square6"] && board["square6"] == 
+            board["square9"] && board["square3"] != ""){
+		winner = board["square3"];
+	}
+
+	// Hard coded diagonals
+	if( board["square1"] == board["square5"] && board["square5"] == 
+            board["square9"] && board["square1"] != ""){
+		winner = board["square1"];
+	}
+	if( board["square3"] == board["square5"] && board["square5"] == 
+            board["square7"] && board["square3"] != ""){
+		winner = board["square3"];
+	}
+
+	return winner;
+
+}
+
+var turn = 0;
+// A one dimensional array. Element 0 will not be used.
+var board = new Array(); 
+wipeBoard(board); // Sensible to initialise array values
+
+// Only start once everything is loaded
+$(document).ready(function(){
+
+	// When a square is clicked...
+	$(".square").click(function(){
+
+		// Check if it's a blank square
+		if( $(this).hasClass("blank") ){
+
+			// Alternate between noughts and crosses
+			if ( turn % 2 == 0) {
+				$(this).addClass("nought");
+				$(this).removeClass("blank cross");
+				$(this).html("O");
+
+				$("#myTurn").addClass("cross");	
+				$("#myTurn").removeClass("nought");
+				$("#myTurn").html("X");
+
+				// Store this turn in the board array
+				board[$(this).attr("id")] = "nought";
+
+			}
+			else {
+				$(this).addClass("cross");	
+				$(this).removeClass("blank nought");
+				$(this).html("X");
+
+				$("#myTurn").addClass("nought");	
+				$("#myTurn").removeClass("cross");
+				$("#myTurn").html("O");
+
+				// Store this turn in the board array
+				board[$(this).attr("id")] = "cross";
+
+			}
+
+			// Increment to the next turn
+			turn++;					
+
+			// Check if anyone won
+			winning = checkWinner(board);
+			if ( winning != "N" ){
+
+				$('#messageBox').append( 
+                                   winning[0].toUpperCase() + 
+                                   winning.slice(1) +" wins!"
+                                );
+				$('#messageBox').removeClass();
+				$('#messageBox').addClass(winning);
+
+				// Cannot click on any more squares
+				$(".square").removeClass("blank");
+				$(".square").addClass("unclickable");
+			}
+
+			// Check if it's the last move
+			else if( turn == 9 ){
+				$('#messageBox').html("Game Over!");
+			}
+
+		} 
+
+	});
+
+	// Reset the game when button clicked
+	// --------------------------------------
+	$("#reset").click(function(){
+		// Remove all of the O, X and reset the squares to blank 
+                //(&nbsp; is a tab)
+		$(".square").html(" ");
+		$(".square").removeClass("nought cross unclickable");
+		$(".square").addClass("blank");
+
+		// Get rid of any messages in the messageBox div 
+                // and any colours
+		$("#messageBox").html("");
+		$("#messageBox").removeClass();
+
+		// Reset the turns to 0, and nought starts
+		turn = 0;
+		$("#myTurn").html("O");
+		$("#myTurn").addClass("nought");	
+		$("#myTurn").removeClass("cross");
+
+		// Wipe the board
+		wipeBoard(board);
+
+	});
+
+});
+
+</script>
+
+</head>
+
+<body>
+<h1>Noughts and Crosses</h1>
+
+<div id="turnBox">
+	It is <span id="myTurn" class="nought">O</span>'s turn
+</div>
+
+<div id="container" class="row">
+	<div id="square1" class="square blank"> </div>
+	<div id="square2" class="square blank"> </div>
+	<div id="square3" class="square blank"> </div>
+
+	<div id="square4" class="square blank"> </div>
+	<div id="square5" class="square blank"> </div>
+	<div id="square6" class="square blank"> </div>
+
+	<div id="square7" class="square blank"> </div>
+	<div id="square8" class="square blank"> </div>
+	<div id="square9" class="square blank"> </div>
+
+	<button id="reset">Start again</button>
+
+</div>
+<div id="messageBox"></div>
+
+</body>
+</html>
+
+
+

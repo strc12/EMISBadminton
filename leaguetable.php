@@ -61,16 +61,20 @@
 
                     <?php
                       include 'connect.php';
-                      echo '<table style="width:30%">';
+                      echo '<table style="width:50%">';
                       echo '<tr>';
                       echo '<th>Position</th>';
                       echo '<th>Team Name</th>';
+                      echo '<th>Games played</th>';
                       echo '<th>Games Won</th>';
+		      echo '<th>Games Lost</th>';
+		      echo '<th>Points for</th>';
+		      echo '<th>Poinst against</th>';
                       echo '</tr>';
 
                       $Acount = 0;
 
-                      $Asqlquery = "SELECT name, gameswon from team where league = 'A' order by gameswon desc";
+                      $Asqlquery = "SELECT * from team where league = 'A' order by gameswon desc";
                       $Aresults = $mysqli -> query($Asqlquery);
                       if ($Aresults -> num_rows > 0) {
                         while ($Arows = $Aresults -> fetch_assoc()) {
@@ -78,23 +82,31 @@
                           echo '<tr>';
                           echo '<td>' . $Acount . '</td>';
                           echo '<td>' . $Arows['name'] . '</td>';
+			  echo '<td>' . $Arows['matchesplayed'] . '</td>';
                           echo '<td>' . $Arows['gameswon'] . '</td>';
+                          echo '<td>' . $Arows['gamesloss'] . '</td>';
+			  echo '<td>' . $Arows['pointswon'] . '</td>';
+			  echo '<td>' . $Arows['pointsloss'] . '</td>';
                           echo '</tr>';
 
                         }
                       }
                       echo '</table>';
                       echo '<ins>Teams League B Table</ins><br>';
-                      echo '<table style="width:30%">';
+                      echo '<table style="width:50%">';
                       echo '<tr>';
                       echo '<th>Position</th>';
                       echo '<th>Team Name</th>';
+                      echo '<th>Games played</th>';
                       echo '<th>Games Won</th>';
+		      echo '<th>Games Lost</th>';
+		      echo '<th>Points for</th>';
+		      echo '<th>Poinst against</th>';
                       echo '</tr>';
 
                       $Bcount = 0;
 
-                      $Bsqlquery = "SELECT name, gameswon from team where league ='B' order by gameswon desc";
+                      $Bsqlquery = "SELECT * from team where league ='B' order by gameswon desc";
                       $Bresults = $mysqli ->query($Bsqlquery);
                       if ($Bresults -> num_rows > 0) {
                         while ($Brows = $Bresults -> fetch_assoc()) {
@@ -102,7 +114,11 @@
                           echo '<tr>';
                           echo '<td>' . $Bcount . '</td>';
                           echo '<td>' . $Brows['name'] . '</td>';
+			  echo '<td>' . $Brows['matchesplayed'] . '</td>';
                           echo '<td>' . $Brows['gameswon'] . '</td>';
+                          echo '<td>' . $Brows['gamesloss'] . '</td>';
+			  echo '<td>' . $Brows['pointswon'] . '</td>';
+			  echo '<td>' . $Brows['pointsloss'] . '</td>';
                           echo '<tr>';
                         }
                       }

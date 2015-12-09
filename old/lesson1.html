@@ -1,0 +1,37 @@
+<html>
+<head>
+<style>
+li {
+color:red;
+}
+.emphasis{
+color:green;
+
+}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('li:first-child').addClass('emphasis')
+});
+
+</script>
+</head>
+
+<body>
+<ul class="emphasis">
+	<li>hello</li>
+	<li>hello2</li>
+	<li>hello3</li>
+	<li>hello4</li>
+	<li>hello5</li>
+		<ul>
+			<li>kjdfghksjdfh</li>
+		</ul>
+</ul>
+<script>
+	$('ul.emphasis').children('li').eq(2).next().text("addrec");
+</script>
+	
+</body>
+</html>

@@ -1,9 +1,9 @@
 <?php
 
-$DB_NAME = '1991723_bad';
-$DB_HOST = 'fdb12.awardspace.net';
-$DB_USER = '1991723_bad';
-$DB_PASS = 'squirt@72';
+$DB_NAME = 'badminton';
+$DB_HOST = 'localhost';
+$DB_USER = 'root';
+$DB_PASS = 'squirt72';
 
 $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 

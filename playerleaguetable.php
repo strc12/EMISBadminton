@@ -56,7 +56,7 @@
                     <br>
                     <h3>For the Teams League Table: <a href="/leaguetable.php">CLICK HERE</a><br><br>
 
-                    <ins>Top 20 Players in the League</ins></h3>
+                    <ins>Players performance in the League</ins></h3>
 
                   <?php
                     include 'connect.php';
@@ -64,11 +64,15 @@
                     echo '<tr>';
                     echo '<th>Position</th>';
                     echo '<th>Player Name</th>';
-                    echo '<th>Games Won</th>';
+                    echo '<th>Win Percentage</th>';
+                    echo '<th>Games won</th>';
+                    echo '<th>Games Lost</th>';
+                    echo '<th>Points for</th>';
+                    echo '<th>Points against</th>';
                     echo '</tr>';
                     $count = 0;
 
-                    $sqlquery = "SELECT * from players order by gameswon desc limit 20";
+                    $sqlquery = "SELECT * from players where ((gameswon+gamesloss)>0) order by (gameswon/(gameswon+gamesloss)) desc";
                     $results = $mysqli -> query($sqlquery);
 
                     if ($results -> num_rows >0) {
@@ -84,7 +88,12 @@
                         echo '<tr>';
                         echo '<td>' . $count . '</td>';
                         echo "<td>" . $rows['FirstName'] . " " . $rows['LastName'] . " (" . $foundschoolname . ")</td>";
+			$percent=round((($rows['gameswon'] /($rows['gameswon'] +$rows['gamesloss'] ))*100),2);
+                        echo "<td>" . $percent . "%</td>";
                         echo "<td>" . $rows['gameswon'] . "</td>";
+                        echo "<td>" . $rows['gamesloss'] . "</td>";
+                        echo "<td>" . $rows['pointswon'] . "</td>";
+                        echo "<td>" . $rows['pointsloss'] . "</td>";
                         echo '</tr>';
                       }
                     }

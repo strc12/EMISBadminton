@@ -92,7 +92,7 @@
                           }
                         }
                       echo '</select>';
-                      mysqli_close();
+                      //mysqli_close();
                       ?>
                       <br><br>
                       Date: <input type = "date" name = "fixturedate" value = "<?php echo date ("Y-m-d")?>">
@@ -131,7 +131,7 @@
                         }
                         }
 
-                      $sqlquery = "INSERT INTO fixtures VALUES (NULL, '$foundhomeID', '$foundawayID', '$_POST[fixturedate]', 0, '$foundhomeschoolID', '$foundawayschoolID')" ;
+                      $sqlquery = "INSERT INTO fixtures VALUES (NULL, '$foundhomeID', '$foundawayID', '$_POST[fixturedate]', 0, '$foundhomeschoolID', '$foundawayschoolID',0,0)" ;
                       if (mysqli_query($mysqli, $sqlquery)) {
                           echo '<script type="text/javascript">';
                           echo ' alert("Fixture Added!")';
