@@ -1,0 +1,6 @@
+INSERT INTO `archive results`(`date`, `hometeam`, `League`, `awayteam`, `home score`, `awayscore`, `season`) SELECT a.FixtDate ,homet.name, homet.league, awayt.name, a.homegames,a.awaygames,'seasoncompleted'
+from fixtures a
+JOIN team as homet on (a.HomeTeamID=homet.teamid)
+JOIN team as awayt on (awayt.teamid=a.AwayTeamID )
+
+inserts scores into archive season needs some work to get in a default value as none in select query
